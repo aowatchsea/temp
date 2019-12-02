@@ -1,0 +1,32 @@
+import oasis from '@oasislabs/client';
+
+jest.setTimeout(20000);
+
+describe('Simstore', () => {
+  let service;
+  beforeAll(async () => {
+    service = await oasis.workspace.Simstore.deploy('run gas test',{
+      header: { confidential: false },
+      gasLimit: '0xe79732',
+    });
+  });
+  // beforeAll(async () => {
+  //   service = await oasis.workspace.Simstore.deploy('run gas test', {
+  //     header: { confidential: false},
+  //     gasLimit: '0xe79732',
+  //   });
+  // });
+  it('TEST GAS #0', async () => {
+    let ret = await service.fetch();
+    console.log(ret);    
+  });
+
+  // it('TEST GAS #0', async () => {
+  //   let ret = await service.fetch();
+  //   console.log(ret);
+  // });
+
+  afterAll(() => {
+    oasis.disconnect();
+  });
+});
