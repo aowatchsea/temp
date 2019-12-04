@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <h1>DEMO #1</h1>
-    <center>Secret Sharing via block chain</center>
+    <h1>DEMO</h1>
+    <center>This is a demo</center>
     <br/>
     <hr/>
     <br/>
+    <v-row style="background-color: #f7f7f7;">
 
-    <sender name="Sender"/>
-    <receiver name="Receiver"/>
+    <sender name="Sender" :g1= "g1" :g2= "g2" :z= "z" :u1= "u1" :u2="u2" :kappa="kappa" :flag_s="flag_s" @updateCT="updateCT" @switchAll="switchAll" />
+    <receiver name="Receiver" @updatePK="updatePK" :C1= "C1" :C2= "C2" :D1= "D1" :D2= "D2" :E= "E" :C= "C" :flag_r="flag_r" @switchS="switchS" @switchAll="switchAll" />
 
+    </v-row>
+    
   </div>
 </template>
 
@@ -23,6 +26,46 @@ export default {
     sender,
     receiver,
   },
+  data () {
+    return {
+      kappa: '',
+      g1: '',
+      g2: '',
+      z: '',
+      u1: '',
+      u2: '',
+      C1: '',
+      C2: '',
+      D1: '',
+      D2: '',
+      E: '',
+      C: '',
+      flag_s: true,
+      flag_r: false,
+    }
+  },
+  methods: {
+    updatePK(pk) {
+      this.g1 = pk.g1;      
+      this.g2 = pk.g2;
+      this.z = pk.z;
+      this.u1 = pk.u1;
+      this.u2 = pk.u2;
+      this.kappa = pk.L;
+    },
+    updateCT(ct) {
+      this.C1 = ct.C1;
+      this.C2 = ct.C2;
+      this.D1 = ct.D1;
+      this.D2 = ct.D2;
+      this.E = ct.E;
+      this.C = ct.C;
+    },
+    switchAll(){
+      this.flag_s = !this.flag_s;
+      this.flag_r = !this.flag_r;
+    },
+  }
 }
 
 </script>
@@ -36,56 +79,8 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.explain_panel {
-  font-weight: bold;
-  font-size: 14px;
-  border: 2px;
-  border: 1px solid #d4d4d4;
-  border-radius: 10px;
-  /*margin-left: 100px;*/
-  padding: 20px;
-  position: relative;
-}
-.explain_panel:before {
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid #ccc;
-    border-right: 0px solid #ccc;
-    border-top: 10px solid transparent;
-    content: " ";
-    display: inline-block;
-    position: absolute;
-    left: auto;
-    right: -10px;
-    top: 10px;
-}
-.explain_panel:after {
-    border-bottom: 9px solid transparent;
-    border-left: 9px solid #fff;
-    border-right: 0 solid #fff;
-    border-top: 9px solid transparent;
-    content: " ";
-    display: inline-block;
-    position: absolute;
-    left: auto;
-    right: -9px;
-    top: 11px;
-}
-.line_button {
-  position: relative;
-  top: 15px;
-}
 .block_message {
   margin-bottom: 30px;
-}
-
-.lines-horizontal {
-  position: relative;
-  top: 25px;
-  border-top: 1px dashed black;
-  left: -10px;
-}
-.ant-alert {
-  font-size: 14px;
-  overflow: auto;
+  overflow: hidden;
 }
 </style>

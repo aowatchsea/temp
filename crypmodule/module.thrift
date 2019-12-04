@@ -20,12 +20,19 @@ struct Enc {
   3: string z,
   4: string u1,
   5: string u2,
-  6: string tag
+  6: string L,
+  7: string M
 }
 
 struct RetEnc {
-  1: string symkey
-  2: string ctx
+  1: string C1,
+  2: string C2,
+  3: string D1,
+  4: string D2,
+  5: string E,
+  6: string symkey,
+  7: string tag,
+  8: string C
 }
 
 struct Dec {
@@ -34,11 +41,18 @@ struct Dec {
   3: string y1,
   4: string y2,
   5: string tag,
-  6: string ctx
+  6: string C1,
+  7: string C2,
+  8: string D1,
+  9: string D2,
+  10: string E,
+  11: string L,
+  12: string C
 }
 
 struct RetDec {
-  1: string symkey
+  1: string M,
+  2: string ok
 }
 
 service setup {

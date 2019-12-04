@@ -226,16 +226,20 @@ class Enc(object):
      - z
      - u1
      - u2
+     - L
+     - M
 
     """
 
 
-    def __init__(self, g1=None, g2=None, z=None, u1=None, u2=None,):
+    def __init__(self, g1=None, g2=None, z=None, u1=None, u2=None, L=None, M=None,):
         self.g1 = g1
         self.g2 = g2
         self.z = z
         self.u1 = u1
         self.u2 = u2
+        self.L = L
+        self.M = M
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -271,6 +275,16 @@ class Enc(object):
                     self.u2 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
+            elif fid == 6:
+                if ftype == TType.STRING:
+                    self.L = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 7:
+                if ftype == TType.STRING:
+                    self.M = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
             else:
                 iprot.skip(ftype)
             iprot.readFieldEnd()
@@ -301,6 +315,14 @@ class Enc(object):
             oprot.writeFieldBegin('u2', TType.STRING, 5)
             oprot.writeString(self.u2.encode('utf-8') if sys.version_info[0] == 2 else self.u2)
             oprot.writeFieldEnd()
+        if self.L is not None:
+            oprot.writeFieldBegin('L', TType.STRING, 6)
+            oprot.writeString(self.L.encode('utf-8') if sys.version_info[0] == 2 else self.L)
+            oprot.writeFieldEnd()
+        if self.M is not None:
+            oprot.writeFieldBegin('M', TType.STRING, 7)
+            oprot.writeString(self.M.encode('utf-8') if sys.version_info[0] == 2 else self.M)
+            oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
 
@@ -322,15 +344,27 @@ class Enc(object):
 class RetEnc(object):
     """
     Attributes:
+     - C1
+     - C2
+     - D1
+     - D2
+     - E
      - symkey
-     - ctx
+     - tag
+     - C
 
     """
 
 
-    def __init__(self, symkey=None, ctx=None,):
+    def __init__(self, C1=None, C2=None, D1=None, D2=None, E=None, symkey=None, tag=None, C=None,):
+        self.C1 = C1
+        self.C2 = C2
+        self.D1 = D1
+        self.D2 = D2
+        self.E = E
         self.symkey = symkey
-        self.ctx = ctx
+        self.tag = tag
+        self.C = C
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -343,12 +377,42 @@ class RetEnc(object):
                 break
             if fid == 1:
                 if ftype == TType.STRING:
-                    self.symkey = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.C1 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
-                    self.ctx = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.C2 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 3:
+                if ftype == TType.STRING:
+                    self.D1 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 4:
+                if ftype == TType.STRING:
+                    self.D2 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 5:
+                if ftype == TType.STRING:
+                    self.E = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 6:
+                if ftype == TType.STRING:
+                    self.symkey = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 7:
+                if ftype == TType.STRING:
+                    self.tag = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 8:
+                if ftype == TType.STRING:
+                    self.C = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -361,13 +425,37 @@ class RetEnc(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('RetEnc')
+        if self.C1 is not None:
+            oprot.writeFieldBegin('C1', TType.STRING, 1)
+            oprot.writeString(self.C1.encode('utf-8') if sys.version_info[0] == 2 else self.C1)
+            oprot.writeFieldEnd()
+        if self.C2 is not None:
+            oprot.writeFieldBegin('C2', TType.STRING, 2)
+            oprot.writeString(self.C2.encode('utf-8') if sys.version_info[0] == 2 else self.C2)
+            oprot.writeFieldEnd()
+        if self.D1 is not None:
+            oprot.writeFieldBegin('D1', TType.STRING, 3)
+            oprot.writeString(self.D1.encode('utf-8') if sys.version_info[0] == 2 else self.D1)
+            oprot.writeFieldEnd()
+        if self.D2 is not None:
+            oprot.writeFieldBegin('D2', TType.STRING, 4)
+            oprot.writeString(self.D2.encode('utf-8') if sys.version_info[0] == 2 else self.D2)
+            oprot.writeFieldEnd()
+        if self.E is not None:
+            oprot.writeFieldBegin('E', TType.STRING, 5)
+            oprot.writeString(self.E.encode('utf-8') if sys.version_info[0] == 2 else self.E)
+            oprot.writeFieldEnd()
         if self.symkey is not None:
-            oprot.writeFieldBegin('symkey', TType.STRING, 1)
+            oprot.writeFieldBegin('symkey', TType.STRING, 6)
             oprot.writeString(self.symkey.encode('utf-8') if sys.version_info[0] == 2 else self.symkey)
             oprot.writeFieldEnd()
-        if self.ctx is not None:
-            oprot.writeFieldBegin('ctx', TType.STRING, 2)
-            oprot.writeString(self.ctx.encode('utf-8') if sys.version_info[0] == 2 else self.ctx)
+        if self.tag is not None:
+            oprot.writeFieldBegin('tag', TType.STRING, 7)
+            oprot.writeString(self.tag.encode('utf-8') if sys.version_info[0] == 2 else self.tag)
+            oprot.writeFieldEnd()
+        if self.C is not None:
+            oprot.writeFieldBegin('C', TType.STRING, 8)
+            oprot.writeString(self.C.encode('utf-8') if sys.version_info[0] == 2 else self.C)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -395,18 +483,30 @@ class Dec(object):
      - y1
      - y2
      - tag
-     - ctx
+     - C1
+     - C2
+     - D1
+     - D2
+     - E
+     - L
+     - C
 
     """
 
 
-    def __init__(self, x1=None, x2=None, y1=None, y2=None, tag=None, ctx=None,):
+    def __init__(self, x1=None, x2=None, y1=None, y2=None, tag=None, C1=None, C2=None, D1=None, D2=None, E=None, L=None, C=None,):
         self.x1 = x1
         self.x2 = x2
         self.y1 = y1
         self.y2 = y2
         self.tag = tag
-        self.ctx = ctx
+        self.C1 = C1
+        self.C2 = C2
+        self.D1 = D1
+        self.D2 = D2
+        self.E = E
+        self.L = L
+        self.C = C
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -444,7 +544,37 @@ class Dec(object):
                     iprot.skip(ftype)
             elif fid == 6:
                 if ftype == TType.STRING:
-                    self.ctx = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.C1 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 7:
+                if ftype == TType.STRING:
+                    self.C2 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 8:
+                if ftype == TType.STRING:
+                    self.D1 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 9:
+                if ftype == TType.STRING:
+                    self.D2 = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 10:
+                if ftype == TType.STRING:
+                    self.E = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 11:
+                if ftype == TType.STRING:
+                    self.L = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                else:
+                    iprot.skip(ftype)
+            elif fid == 12:
+                if ftype == TType.STRING:
+                    self.C = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -477,9 +607,33 @@ class Dec(object):
             oprot.writeFieldBegin('tag', TType.STRING, 5)
             oprot.writeString(self.tag.encode('utf-8') if sys.version_info[0] == 2 else self.tag)
             oprot.writeFieldEnd()
-        if self.ctx is not None:
-            oprot.writeFieldBegin('ctx', TType.STRING, 6)
-            oprot.writeString(self.ctx.encode('utf-8') if sys.version_info[0] == 2 else self.ctx)
+        if self.C1 is not None:
+            oprot.writeFieldBegin('C1', TType.STRING, 6)
+            oprot.writeString(self.C1.encode('utf-8') if sys.version_info[0] == 2 else self.C1)
+            oprot.writeFieldEnd()
+        if self.C2 is not None:
+            oprot.writeFieldBegin('C2', TType.STRING, 7)
+            oprot.writeString(self.C2.encode('utf-8') if sys.version_info[0] == 2 else self.C2)
+            oprot.writeFieldEnd()
+        if self.D1 is not None:
+            oprot.writeFieldBegin('D1', TType.STRING, 8)
+            oprot.writeString(self.D1.encode('utf-8') if sys.version_info[0] == 2 else self.D1)
+            oprot.writeFieldEnd()
+        if self.D2 is not None:
+            oprot.writeFieldBegin('D2', TType.STRING, 9)
+            oprot.writeString(self.D2.encode('utf-8') if sys.version_info[0] == 2 else self.D2)
+            oprot.writeFieldEnd()
+        if self.E is not None:
+            oprot.writeFieldBegin('E', TType.STRING, 10)
+            oprot.writeString(self.E.encode('utf-8') if sys.version_info[0] == 2 else self.E)
+            oprot.writeFieldEnd()
+        if self.L is not None:
+            oprot.writeFieldBegin('L', TType.STRING, 11)
+            oprot.writeString(self.L.encode('utf-8') if sys.version_info[0] == 2 else self.L)
+            oprot.writeFieldEnd()
+        if self.C is not None:
+            oprot.writeFieldBegin('C', TType.STRING, 12)
+            oprot.writeString(self.C.encode('utf-8') if sys.version_info[0] == 2 else self.C)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -502,13 +656,13 @@ class Dec(object):
 class RetDec(object):
     """
     Attributes:
-     - symkey
+     - M
 
     """
 
 
-    def __init__(self, symkey=None,):
-        self.symkey = symkey
+    def __init__(self, M=None,):
+        self.M = M
 
     def read(self, iprot):
         if iprot._fast_decode is not None and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None:
@@ -521,7 +675,7 @@ class RetDec(object):
                 break
             if fid == 1:
                 if ftype == TType.STRING:
-                    self.symkey = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.M = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             else:
@@ -534,9 +688,9 @@ class RetDec(object):
             oprot.trans.write(oprot._fast_encode(self, [self.__class__, self.thrift_spec]))
             return
         oprot.writeStructBegin('RetDec')
-        if self.symkey is not None:
-            oprot.writeFieldBegin('symkey', TType.STRING, 1)
-            oprot.writeString(self.symkey.encode('utf-8') if sys.version_info[0] == 2 else self.symkey)
+        if self.M is not None:
+            oprot.writeFieldBegin('M', TType.STRING, 1)
+            oprot.writeString(self.M.encode('utf-8') if sys.version_info[0] == 2 else self.M)
             oprot.writeFieldEnd()
         oprot.writeFieldStop()
         oprot.writeStructEnd()
@@ -580,12 +734,20 @@ Enc.thrift_spec = (
     (3, TType.STRING, 'z', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'u1', 'UTF8', None, ),  # 4
     (5, TType.STRING, 'u2', 'UTF8', None, ),  # 5
+    (6, TType.STRING, 'L', 'UTF8', None, ),  # 6
+    (7, TType.STRING, 'M', 'UTF8', None, ),  # 7
 )
 all_structs.append(RetEnc)
 RetEnc.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'symkey', 'UTF8', None, ),  # 1
-    (2, TType.STRING, 'ctx', 'UTF8', None, ),  # 2
+    (1, TType.STRING, 'C1', 'UTF8', None, ),  # 1
+    (2, TType.STRING, 'C2', 'UTF8', None, ),  # 2
+    (3, TType.STRING, 'D1', 'UTF8', None, ),  # 3
+    (4, TType.STRING, 'D2', 'UTF8', None, ),  # 4
+    (5, TType.STRING, 'E', 'UTF8', None, ),  # 5
+    (6, TType.STRING, 'symkey', 'UTF8', None, ),  # 6
+    (7, TType.STRING, 'tag', 'UTF8', None, ),  # 7
+    (8, TType.STRING, 'C', 'UTF8', None, ),  # 8
 )
 all_structs.append(Dec)
 Dec.thrift_spec = (
@@ -595,12 +757,18 @@ Dec.thrift_spec = (
     (3, TType.STRING, 'y1', 'UTF8', None, ),  # 3
     (4, TType.STRING, 'y2', 'UTF8', None, ),  # 4
     (5, TType.STRING, 'tag', 'UTF8', None, ),  # 5
-    (6, TType.STRING, 'ctx', 'UTF8', None, ),  # 6
+    (6, TType.STRING, 'C1', 'UTF8', None, ),  # 6
+    (7, TType.STRING, 'C2', 'UTF8', None, ),  # 7
+    (8, TType.STRING, 'D1', 'UTF8', None, ),  # 8
+    (9, TType.STRING, 'D2', 'UTF8', None, ),  # 9
+    (10, TType.STRING, 'E', 'UTF8', None, ),  # 10
+    (11, TType.STRING, 'L', 'UTF8', None, ),  # 11
+    (12, TType.STRING, 'C', 'UTF8', None, ),  # 12
 )
 all_structs.append(RetDec)
 RetDec.thrift_spec = (
     None,  # 0
-    (1, TType.STRING, 'symkey', 'UTF8', None, ),  # 1
+    (1, TType.STRING, 'M', 'UTF8', None, ),  # 1
 )
 fix_spec(all_structs)
 del all_structs

@@ -73,13 +73,15 @@ if __name__ == '__main__':
 
   receiver = Entity()
   ctext = receiver.enc(pk, t, M)
-  
-  FFF = receiver.symEnc('hello world!')
 
+
+  FFF = receiver.symEnc('I am Chinese')
+  
+
+  import ast
+  FFF = ast.literal_eval(str(FFF))  
+  
   sender = Entity()
   sender.dec(sk, t, ctext, pk.group)
   DDD = sender.symDec(FFF)
-  print(DDD)
-  # print()
-
-
+  print(bytes.decode(DDD))
